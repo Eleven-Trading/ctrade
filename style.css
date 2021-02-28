@@ -1,0 +1,40 @@
+.blueSeparator{
+    border-right: 3px solid #01B4FF;
+}
+
+button {
+    border: 0px solid transparent !important;
+}
+
+input{
+    border-top: 0px solid transparent !important;
+    border-left: 0px solid transparent !important;
+    border-right: 0px solid transparent !important;
+    border-bottom: 2px solid #7f8388 !important;
+    border-radius: 0 !important;
+    background-color: #333 !important;
+    color: white !important;
+}
+::placeholder {
+    color: #7f8388!important;
+}
+
+.lightGrey {
+    color: #7f8388;
+    font-size: small;
+}
+
+body{
+    background-color: #333;
+    color: white;
+}
+
+.dateText{
+    font-size: small;
+    font-style: italic;
+}
+
+.row {
+    padding: 0 !important;
+    margin: 0 !important;
+}

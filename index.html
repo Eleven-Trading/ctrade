@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Timer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css"/>
+    <script src="https://use.fontawesome.com/365512f0c3.js"></script>
+  </head>
+  <body>
+    <div id="vapp" class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col row" style="-webkit-app-region: drag">
+          <div class="col">
+            <span class="lightGrey">5mn: </span>{{fiveMin}}
+          </div>
+          <div class="col">
+            <span class="lightGrey">1mn: </span>{{oneMin}}
+          </div>
+          <div class="col">
+            <span class="lightGrey">Time: </span><span>{{usClock}}</span>
+          </div>
+          <div class="col-12 text-center">
+            <span class="dateText lightGrey">{{usDate}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end vue app-->
+
+    <script>
+      window.jQuery = window.$ = require('jquery');
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      const vueApp = new Vue({
+
+        components: {},
+        el: '#vapp',
+
+        data() {
+          return {spinner: false, oneMin: null, fiveMin: null, usClock: null, usDate: null}
+        },
+
+        created() {},
+
+        watch: {},
+        mounted() {
+          getSize = () => {
+            var screenSize = {
+              "monitorWidth": window.innerWidth,
+              "monitorHeight": window.innerHeight
+            }
+
+            localStorage.setItem('screenSize', JSON.stringify(screenSize))
+          }
+          window.onresize = getSize
+
+          fiveMinCountdown = () => {
+            var cur_date = new Date();
+            var hour = cur_date.getHours();
+            var minutes = cur_date.getMinutes();
+            var seconds = cur_date.getSeconds();
+            var minutes_remain = 5 - minutes % 5 - 1;
+            var seconds_remain = 59 - seconds;
+
+            this.fiveMin = (
+              minutes_remain < 10
+              ? "0"
+              : "") + minutes_remain + ":" + (
+              seconds_remain < 10
+              ? "0"
+              : "") + seconds_remain
+
+          }
+
+          oneMinCountdown = () => {
+            var cur_date = new Date();
+            var hour = cur_date.getHours();
+            var minutes = cur_date.getMinutes();
+            var seconds = cur_date.getSeconds();
+            var minutes_remain = 1 - minutes % 1 - 1;
+            var seconds_remain = 59 - seconds;
+            
+            this.oneMin = (
+              minutes_remain < 10
+              ? "0"
+              : "") + minutes_remain + ":" + (
+              seconds_remain < 10
+              ? "0"
+              : "") + seconds_remain
+          }
+
+          getTime = () => {
+            var now = new Date();
+            var USTime = now.toLocaleString("en-US", {
+              timeZone: "America/New_York",
+              hour: 'numeric',
+              minute: 'numeric',
+              second: 'numeric'
+            })
+            this.usClock = USTime
+
+            var options = {
+              weekday: "short",
+              year: "numeric",
+              month: "short",
+              day: "numeric"
+            };
+            var USDate = now.toLocaleString("en-US", options)
+            this.usDate = USDate
+          }
+
+          setInterval(() => {
+            fiveMinCountdown()
+            oneMinCountdown()
+            getTime()
+          }, 1000);
+
+        },
+        methods: {}
+
+      })
+    </script>
+  </body>
+</html>

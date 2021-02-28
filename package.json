@@ -1,0 +1,24 @@
+{
+  "name": "ctrade",
+  "version": "1.0.0",
+  "description": "clock, five minute and one minute countdown timer for trading",
+  "author": "eleven.trading",
+  "license": "GPL-3.0-or-later",
+  "main": "main.js",
+  "build": {
+    "appId": "timer.app",
+    "icon": "./icon.png"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^10.1.1",
+    "electron-builder": "^22.8.0"
+  },
+  "dependencies": {
+    "electron-is-dev": "^1.2.0",
+    "electron-reload": "^1.5.0"
+  }
+}
