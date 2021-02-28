@@ -11,7 +11,7 @@ As a technical trader, I wanted to have a easy and clear view of how minutes and
 - Date and time in New York
 
 ## Screenshots
-<img src="https://7ak-public.s3.amazonaws.com/ctrade_countdown_timer.png" height="300">
+<img src="https://7ak-public.s3.amazonaws.com/ctrade_countdown_timer.png" width="500">
 
 # Tech/framework used
 
