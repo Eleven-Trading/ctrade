@@ -3,28 +3,27 @@
   <head>
     <meta charset="UTF-8">
     <title>Timer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css"/>
     <script src="https://use.fontawesome.com/365512f0c3.js"></script>
   </head>
   <body>
     <div id="vapp" class="container-fluid">
-      <div class="row align-items-center">
-        <div class="col row" style="-webkit-app-region: drag">
-          <div class="col">
-            <span class="lightGrey">5mn: </span>{{fiveMin}}
-          </div>
-          <div class="col">
-            <span class="lightGrey">1mn: </span>{{oneMin}}
-          </div>
-          <div class="col">
-            <span class="lightGrey">Time: </span><span>{{usClock}}</span>
-          </div>
-          <div class="col-12 text-center">
-            <span class="dateText lightGrey">{{usDate}}</span>
-          </div>
+
+      <div style="-webkit-app-region: drag" class="text-center">
+
+        <div>
+
+          <span class="lightGrey">NY: </span><span style="font-size:x-large;">{{usClock}}</span>
+        </div>
+        <div>
+          <span class="lightGrey">EU: </span><span style="font-size:small;">{{euClock}}</span>
+        </div>
+        <div>
+          <span class="dateText lightGrey">{{usDate}}</span>
         </div>
       </div>
+
     </div>
     <!--end vue app-->
 
@@ -32,7 +31,7 @@
       window.jQuery = window.$ = require('jquery');
     </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <script>
@@ -42,7 +41,14 @@
         el: '#vapp',
 
         data() {
-          return {spinner: false, oneMin: null, fiveMin: null, usClock: null, usDate: null}
+          return {
+            spinner: false,
+            oneMin: null,
+            fiveMin: null,
+            usClock: null,
+            euClock: null,
+            usDate: null
+          }
         },
 
         created() {},
@@ -84,7 +90,7 @@
             var seconds = cur_date.getSeconds();
             var minutes_remain = 1 - minutes % 1 - 1;
             var seconds_remain = 59 - seconds;
-            
+
             this.oneMin = (
               minutes_remain < 10
               ? "0"
@@ -103,6 +109,14 @@
               second: 'numeric'
             })
             this.usClock = USTime
+
+            var EUTime = now.toLocaleString("fr-FR", {
+              timeZone: "Europe/Paris",
+              hour: 'numeric',
+              minute: 'numeric',
+              second: 'numeric'
+            })
+            this.euClock = EUTime
 
             var options = {
               weekday: "short",
